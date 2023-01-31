@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} Post Oluştur {% endblock title %}
+
+{% block icerik %}
+  
+<form action="{% url 'handleCreatePost' %}" method="post">
+
+    {% csrf_token %}
+    {{blogPost.as_p}}
+
+    <button type="submit">Gönder</button>
+
+</form>
+
+{% endblock icerik %}

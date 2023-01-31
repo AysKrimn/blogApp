@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %} AnaSayfa {% endblock title %}
+
+
+{% block icerik %}
+
+{{request.user}}
+<div class="container">
+
+<div class="mt-2 mb-3 d-flex justify-content-end">
+
+    <div>
+        <a type="button" class="btn btn-success" href=" {% url 'handleCreatePost' %}"> + </a>
+    </div>
+
+
+</div>
+
+
+
+<div class="row">
+
+
+
+    {% if posts.count %}
+    
+    {% for post in posts %}
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+       
+        <div class="card-body">
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">{{post.message}} <br><br> Yorumlar: {{post.yorumlar.count}}  </p>
+          <div class="continue_to_read">
+            <a href="{% url 'singlePost' post.endPoint %}"> Devamını Oku</a>
+          </div>
+          
+          {% if post.image %}
+            <div class="banner">
+              <img src="{{post.image.url}}" alt="post-resmi-{{post.id}}">
+            </div>
+      
+
+          {% endif %}
+          
+
+
+          <div class="mt-3 mb-2">
+            <span>Yazar: {{post.author.username}}</span>
+          </div>
+      
+          <p> <small>{{post.createdAt}}</small>  </p>
+        
+
+        </div>
+
+      </div>
+
+      </div>
+        
+      {% endfor %}
+
+
+      {% else %}
+
+      <p>Herhangi bir post yok</p>
+      
+      {% endif %}
+
+
+</div>
+  
+
+</div>
+
+{% endblock icerik %}

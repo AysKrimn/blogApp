@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+
+{% block title %}  {{post.endPoint}} {% endblock title %}
+
+{% block ek %}
+<style>
+
+ .card-body { height: auto;}
+
+ .tools form button {
+    border: none;
+    background: transparent;
+ }
+
+ .tools form { 
+    display: inline-block;
+ }
+
+ .tools button[class="text-warning"] {
+
+    color: #e1a01b !important;
+ }
+</style>
+
+{% endblock ek %}
+
+
+{% block icerik %}
+  
+
+
+<div class="kapsayici">
+
+
+<div class="card mb-3">
+
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5>
+      <p class="card-text">{{post.message}}</p>
+      <p class="card-text">
+  
+        <small class="text-muted">{{post.author}} tarafından {{post.createdAt}} oluşturuldu</small>
+    
+      </p>
+    </div>
+
+    {% if post.image %}
+    <img src="{{post.image.url}}" class="card-img-bottom" alt="post-banner-{{post.id}}">   
+    {% endif %}
+   
+  
+</div>
+
+<h3>Yorum Yapanlar:</h3>
+<hr>
+<div class="comments">
+
+    {% for yorum in post.yorumlar.all %}
+
+    
+    <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between">
+          <span> {{yorum.author.username}} dedi ki:</span>
+
+
+          {% if yorum.author.id == request.user.id or yorum.post.author.id == request.user.id %}
+          <div class="tools">
+          <form action="{% url 'delete-comment' yorum.id %}" method="post">
+            {% csrf_token %}
+            <button class="text-danger" type="submit">Sil</button>
+          </form>
+
+
+          <form action=" {% url 'update-comment' yorum.id %}" method="get">
+            {% csrf_token %}
+          <button class="text-warning" type="submit">Güncelle</button>
+
+          </form>
+                 
+          </div>
+          {% endif %}
+ 
+        </div>
+
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>{{yorum.message}}</p>
+          </blockquote>
+
+
+          <div class="mt-2">
+            <small class="text-muted"> {{yorum.createdAt}} </small>
+          </div>
+
+     
+        </div>
+      </div>
+
+    
+    {% empty %}
+    <p>Henüz Yorum Yapan Yok</p>
+    {% endfor %}
+</div>
+
+
+<hr>
+<h3>Yorum Yap</h3>
+
+
+{% if request.user.is_authenticated %}
+  
+<div class="makeComment">
+
+    <form action="." method="post">
+    
+        {% csrf_token %}
+    
+        <div class="col-4">
+    
+            <div class="mb-3">
+        
+                <label>
+                    Mesajınız: <br>
+                    {{form.message}}
+                </label>
+               
+     
+            </div>
+    
+    
+        </div>
+        
+    
+        <button type="submit">Gönder</button>
+    
+    </form>
+    
+    
+    </div> 
+    <!-- make comment bitere -->
+
+{% else %}
+  
+<p>Yorum yapmak için <a href="{% url 'user-login' %}">Giriş Yap</a> veya  <a href="{% url 'user-register' %}"> Kayıt Ol</a> </p>
+{% endif %}
+
+
+
+</div>
+
+{% endblock icerik %}

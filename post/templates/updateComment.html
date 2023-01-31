@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}  {% endblock title %}
+
+
+{% block ek %}
+  
+<style>
+
+form * {
+    margin-top: 1rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+</style>
+{% endblock ek %}
+
+
+
+{% block icerik %}
+  
+<div class="container">
+
+
+    <form action="{% url 'update-comment' commentObject.id%}" method="post">
+
+        {% csrf_token %}
+
+        <select name="post">
+
+         <option value="{{post.id}}">{{commentObject.post}}</option>
+ 
+        </select>
+
+        <textarea name="content"> {{commentObject.message}} </textarea>
+ 
+        <button type="submit">Güncelle</button>
+
+
+    </form>
+
+
+
+</div>
+{% endblock icerik %}

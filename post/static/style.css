@@ -1,0 +1,26 @@
+body {
+
+    background-color: rgb(242 244 243) !important;
+}
+
+.kapsayici {
+
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.card-body {
+
+    height: 596px;
+
+}
+
+.continue_to_read {
+    margin-bottom: 10px;
+}
+
+.banner img {
+
+    width: 100%;
+}

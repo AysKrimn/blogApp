@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} Kayıt Ol {% endblock title %}
+
+
+
+
+
+{% block icerik %}
+  
+
+<div class="container">
+
+
+    <div class="col-8 mt-5">
+
+    <form action="{% url 'user-register' %}" method="post">
+
+        {% csrf_token %}
+
+        <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Kullanıcı Adı</label>
+              <input type="text" class="form-control" name="u_name" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Şifre</label>
+              <input type="password" class="form-control" name="u_password" id="exampleInputPassword1">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Şifre Tekrar</label>
+                <input type="password" class="form-control" name="u_password_repeat">
+              </div>
+          
+              <div>
+
+               <p> Zaten bir hesabın varsa <a href="{% url 'user-login' %}"> Giriş Yap</a> </p> 
+              </div>
+            
+              <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+          </form>
+
+
+
+    </form>
+
+</div>
+
+</div>
+
+
+{% endblock icerik %}

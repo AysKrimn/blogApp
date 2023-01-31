@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  Giriş Yap
+{% endblock title %}
+
+
+
+
+{% block icerik %}
+
+{% for message in messages %}
+          
+<p>{{message}}</p>
+{% endfor %}
+
+
+<div class="container">
+
+
+    <div class="col-8 mt-5">
+
+    <form action="{% url 'user-login' %}" method="post">
+
+        {% csrf_token %}
+
+
+      
+
+        <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Kullanıcı Adı</label>
+              <input type="text" class="form-control" name="u_name" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Şifre</label>
+              <input type="password" class="form-control" name="u_password" id="exampleInputPassword1">
+            </div>
+          
+            <div>
+                <a href="{% url 'user-register' %}">Kaıyt ol</a>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Giriş Yap</button>
+          </form>
+
+
+
+    </form>
+
+</div>
+
+</div>
+  
+{% endblock icerik %}
